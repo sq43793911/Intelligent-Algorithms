@@ -1,0 +1,317 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>GA_Kost</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-11-13"><meta name="DC.source" content="GA_Kost.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">&#25104;&#26412;&#30340;&#26368;&#20248;&#21270;&#35745;&#31639;</a></li><li><a href="#2">&#36951;&#20256;&#31639;&#27861;&#27714;&#35299;</a></li><li><a href="#3">&#29256;&#26412; V7.0</a></li><li><a href="#4">&#21152;&#36733;&#25968;&#25454;</a></li><li><a href="#5">&#22788;&#29702;&#34920;&#26684;&#25968;&#25454;</a></li><li><a href="#6">&#36951;&#20256;&#21442;&#25968;</a></li><li><a href="#7">&#21021;&#22987;&#21270;&#31181;&#32676;</a></li><li><a href="#8">&#20248;&#21270;</a></li><li><a href="#9">&#35745;&#31639;&#36866;&#24212;&#24230;</a></li><li><a href="#10">&#36873;&#25321;</a></li><li><a href="#11">&#20132;&#21449;&#25805;&#20316;</a></li><li><a href="#12">&#21464;&#24322;</a></li><li><a href="#13">&#36870;&#36716;&#25805;&#20316;</a></li><li><a href="#14">&#37325;&#25554;&#20837;&#23376;&#20195;&#30340;&#26032;&#31181;&#32676;</a></li><li><a href="#15">&#26356;&#26032;&#25104;&#26412;</a></li><li><a href="#17">&#30011;&#22270;</a></li></ul></div><h2>&#25104;&#26412;&#30340;&#26368;&#20248;&#21270;&#35745;&#31639;<a name="1"></a></h2><p>&#26681;&#25454;&#29289;&#26009;&#28165;&#21333;&#65292;&#20381;&#25454;&#20379;&#36135;&#21608;&#26399;&#30340;&#19981;&#21516;&#65292;&#23558;&#36135;&#29289;&#20998;&#25104;&#20102;7&#31867;&#65292;&#21363;&#65306;7&#22825;&#65292;15&#22825;&#65292;30&#22825;&#65292;45&#22825;&#65292;60&#22825;&#65292;90&#21040;120&#22825;&#65292;120&#22825;&#20197;&#19978;&#12290; &#36755;&#20837;&#21464;&#37327;&#20026;&#35746;&#36135;&#37327;&#65292;&#21333;&#20301;&#65306;&#20214;&#12290;&#22312;&#20027;&#31243;&#24207;&#20013;&#20026;Chrom,&#22312;&#36866;&#24212;&#24230;&#20989;&#25968;&#20013;&#20026;H&#12290; &#20551;&#35774;&#26465;&#20214;&#65306;&#35746;&#36135;&#21608;&#26399;&#19981;&#20250;&#21464;&#21270;          &#29983;&#20135;&#36807;&#31243;&#20013;&#30340;&#29289;&#21147;&#65292;&#20154;&#21147;&#25104;&#26412;&#24658;&#23450;&#12290;          &#29983;&#20135;&#20013;&#27599;&#22825;&#27599;&#31867;&#30340;&#38656;&#27714;&#37327;&#24658;&#23450;          &#27599;&#31867;&#30340;&#36816;&#36755;&#25104;&#26412;&#21644;&#20179;&#20648;&#25104;&#26412;&#19981;&#21516;&#65292;&#20294;&#27599;&#19968;&#27425;&#36816;&#36755;&#30340;&#25104;&#26412;&#30456;&#21516;&#12290;          &#26242;&#26102;&#19981;&#32771;&#34385;&#21322;&#25104;&#21697;&#30340;&#20179;&#20648;&#25104;&#26412;&#12290;          &#20801;&#35768;&#32570;&#36135;&#65292;&#20294;&#35201;&#22312;&#35268;&#23450;&#26399;&#38480;&#20869;&#20132;&#36135;&#65292;&#24037;&#20154;&#23384;&#22312;&#21152;&#29677;&#12290;</p><pre class="codeinput"><span class="comment">%BOM&#28165;&#21333;&#20013;&#65292;&#36824;&#26377;&#19968;&#20123;&#21333;&#20215;&#27809;&#26377;&#34917;&#20840;&#65292;&#20294;&#36825;&#21482;&#24433;&#21709;&#24635;&#25104;&#26412;&#30340;&#22823;&#23567;&#65292;&#24182;&#19981;&#24433;&#21709;&#20248;&#21270;&#36807;&#31243;&#65292;&#25152;&#20197;&#21487;&#20197;&#24573;&#30053;&#12290;</span>
+</pre><h2>&#36951;&#20256;&#31639;&#27861;&#27714;&#35299;<a name="2"></a></h2><pre class="codeinput"><span class="comment">%&#36755;&#20837;&#65306;</span>
+<span class="comment">%NIND    &#20026;&#31181;&#32676;&#20010;&#25968;</span>
+<span class="comment">%MAXGEN  &#20026;&#20572;&#27490;&#20195;&#25968;&#65292;&#36951;&#20256;&#21040;&#31532;MAXGEN&#20195;&#26102;&#31243;&#24207;&#20572;&#27490;,MAXGEN&#30340;&#20855;&#20307;&#21462;&#20540;&#35270;&#38382;&#39064;&#30340;&#35268;&#27169;&#21644;&#32791;&#36153;&#30340;&#26102;&#38388;&#32780;&#23450;</span>
+<span class="comment">%m       &#20026;&#36866;&#20540;&#28120;&#27760;&#21152;&#36895;&#25351;&#25968;,&#26368;&#22909;&#21462;&#20026;1,2,3,4,&#19981;&#23452;&#22826;&#22823;</span>
+<span class="comment">%Pc      &#20132;&#21449;&#27010;&#29575;</span>
+<span class="comment">%Pm      &#21464;&#24322;&#27010;&#29575;</span>
+</pre><h2>&#29256;&#26412; V7.0<a name="3"></a></h2><p>&#23558;&#36755;&#20837;&#21464;&#37327;&#26356;&#25913;&#20026;&#35746;&#36135;&#37327;&#65292;&#20462;&#27491;&#25104;&#26412;&#35745;&#31639;&#27169;&#22411;&#65292;&#20462;&#27491;&#35745;&#31639;&#21442;&#25968;&#12290;</p><pre class="codeinput"><span class="comment">%&#26356;&#26032;&#21382;&#21490;&#65306;</span>
+<span class="comment">%V6.3 &#26356;&#26032;&#30340;&#21407;&#22987;&#30340;&#35746;&#36135;&#21608;&#26399;&#65292;&#25913;&#25104;3&#31867;&#12290;</span>
+<span class="comment">%V6.2 &#20462;&#27491;&#20102;&#25104;&#26412;&#35745;&#31639;&#20013;&#30340;&#19968;&#20010;&#23567;&#38382;&#39064;  11.11</span>
+<span class="comment">%V6.11-V6.12 &#26356;&#25913;&#20102;&#21407;&#26469;&#30340;&#35746;&#36135;&#21608;&#26399;&#65292;&#20351;&#20854;&#31526;&#21512;&#19968;&#33324;&#30340;&#31895;&#29378;&#24335;&#31649;&#29702;&#26041;&#24335;&#12290;&#27880;&#37322;&#23436;&#21892;&#12290;  11.11</span>
+<span class="comment">%V6.0 &#26032;&#29256;&#26412;&#20462;&#25913;&#20102;&#21152;&#29677;&#25104;&#26412;&#30340;&#35745;&#31639;&#26041;&#24335;&#65292;&#20351;&#27169;&#22411;&#26356;&#21152;&#21512;&#29702;    11.11</span>
+<span class="comment">%V5.2 &#22686;&#21152;&#20102;&#21407;&#26469;&#30340;&#35746;&#36135;&#21608;&#26399;&#65292;&#35745;&#31639;&#20986;&#21407;&#26469;&#25104;&#26412;&#20197;&#20379;&#23545;&#27604;&#65292;&#24182;&#22312;&#22270;&#20687;&#20013;&#26174;&#31034;  11.11</span>
+<span class="comment">%V5.1 &#20462;&#27491;&#20102;&#21508;&#31867;&#36816;&#36755;&#25104;&#26412;&#65292;&#20351;&#20854;&#26356;&#31526;&#21512;&#23454;&#38469;&#24773;&#20917;     10.11</span>
+<span class="comment">%V4.1-V5.0 &#20248;&#21270;&#36951;&#20256;&#21442;&#25968;&#65292;&#20351;&#26368;&#20248;&#20540;&#21644;&#26368;&#20248;&#35299;&#23613;&#21487;&#33021;&#21512;&#29702;&#65292;&#23613;&#37327;&#19981;&#20986;&#29616;&#23616;&#37096;&#26368;&#20248;&#35299;    10.11</span>
+<span class="comment">%V4.0 &#25104;&#26412;&#35745;&#31639;&#20013;&#22686;&#21152;&#20102;&#32570;&#36135;&#25104;&#26412;&#35745;&#31639;&#65292;&#22686;&#21152;&#20102;&#20248;&#21270;&#36807;&#31243;&#22270;     09.11</span>
+<span class="comment">%V3.0 &#25104;&#26412;&#35745;&#31639;&#20013;&#23558;&#22266;&#23450;&#24211;&#23384;&#25104;&#26412;&#25913;&#25104;&#20102;&#21464;&#24211;&#23384;&#30340;&#25104;&#26412;&#35745;&#31639;     08.11</span>
+<span class="comment">%V2.0 &#36755;&#20837;&#25968;&#25454;&#65292;&#36755;&#20986;&#25968;&#25454;&#65292;&#31243;&#24207;&#32467;&#26500;&#23436;&#21892;      07.11</span>
+<span class="comment">%V1.0 &#21021;&#22987;&#29256;&#26412;&#65292;&#20026;&#24658;&#23450;&#24211;&#23384;&#25104;&#26412;&#65292;&#24658;&#23450;&#20154;&#21147;&#25104;&#26412;&#65292;&#24658;&#23450;&#29289;&#21147;&#25104;&#26412;&#65292;&#24658;&#23450;&#36141;&#20080;&#25104;&#26412;&#65292;&#21464;&#35746;&#36135;&#25104;&#26412;&#30340;&#24635;&#25104;&#26412;&#35745;&#31639;     05.11</span>
+
+clear
+clc
+close <span class="string">all</span>
+</pre><h2>&#21152;&#36733;&#25968;&#25454;<a name="4"></a></h2><p>format long</p><pre class="codeinput">s = xlsread(<span class="string">'QYC120-BOM&#28165;&#21333;.xls'</span>); <span class="comment">%&#35835;&#21462;&#34920;&#26684;&#25968;&#25454;</span>
+A = 17*6*s(1,9);   <span class="comment">%A&#20026;&#21508;&#31867;&#36141;&#20080;&#25104;&#26412;</span>
+c = 50;          <span class="comment">%&#24037;&#20154;&#30340;&#23567;&#26102;&#24037;&#36164;</span>
+C = 100*17*15*8*c;   <span class="comment">%C&#20026;&#29983;&#20135;&#31181;&#30340;&#20154;&#21147;&#25104;&#26412;&#65292;&#20551;&#35774;&#19981;&#32570;&#36135;&#65292;&#19981;&#21152;&#29677;</span>
+d = 10000;       <span class="comment">%&#29983;&#20135;&#19968;&#20010;&#25209;&#27425;&#30340;&#29289;&#21147;&#25104;&#26412;</span>
+D = 17*d;        <span class="comment">%D&#20026;&#29983;&#20135;&#36807;&#31243;&#20013;&#30340;&#29289;&#21147;&#25104;&#26412;</span>
+e = [0.01 0.05 0.1 0.5 1 5 10];   <span class="comment">%&#23384;&#20648;&#25104;&#26412;</span>
+N = 7;             <span class="comment">%N&#20026;&#35746;&#36141;&#20998;&#31867;</span>
+t = [500 500 1000 2000 3000 6000 8000];  <span class="comment">%&#36816;&#36755;&#25104;&#26412;</span>
+siche = 20;        <span class="comment">%&#23433;&#20840;&#24211;&#23384;&#37327;&#65292;&#28385;&#36275;&#35813;&#21442;&#25968;&#22825;&#25968;&#29983;&#20135;&#30340;&#38656;&#35201;</span>
+minni = [7 15 30 45 60 120 160];    <span class="comment">%&#27599;&#31867;&#30340;&#26368;&#20302;&#35746;&#36135;&#21608;&#26399;&#65292;&#20302;&#20110;&#36825;&#20010;&#21608;&#26399;&#21017;&#20250;&#20135;&#29983;&#32570;&#36135;</span>
+</pre><h2>&#22788;&#29702;&#34920;&#26684;&#25968;&#25454;<a name="5"></a></h2><pre class="codeinput"><span class="comment">%&#35745;&#31639;&#21508;&#31867;&#27599;&#25209;&#27425;&#27599;&#36710;&#30340;&#38656;&#27714;&#37327;</span>
+y = size(s,1);
+a = zeros(N,1);
+<span class="keyword">for</span> z = 3:y
+    <span class="keyword">if</span> s(z,8)&lt;=7
+        a(1) = s(z,6)+a(1);
+    <span class="keyword">elseif</span> s(z,8)&gt;7&amp;&amp;s(z,8)&lt;=15
+        a(2) = s(z,6)+a(2);
+    <span class="keyword">elseif</span> s(z,8)&gt;15&amp;&amp;s(z,8)&lt;=30
+        a(3) = s(z,6)+a(3);
+    <span class="keyword">elseif</span> s(z,8) == 45
+        a(4) = s(z,6)+a(4);
+    <span class="keyword">elseif</span> s(z,8) == 60
+        a(5) = s(z,6)+a(5);
+    <span class="keyword">elseif</span> s(z,8)&gt;=90&amp;&amp;s(z,8)&lt;=120
+        a(6) = s(z,6)+a(6);
+    <span class="keyword">else</span>
+        a(7) = s(z,6)+a(7);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="comment">%&#35745;&#31639;&#27599;&#22825;&#38656;&#27714;&#65288;&#22343;&#20540;&#65289;;&#35745;&#31639;&#27599;&#31867;&#30340;&#24635;&#38656;&#27714;&#37327;</span>
+u = zeros(N,1);
+w = zeros(N,1);
+S = zeros(N,1);
+Bestellungpunkt = zeros(N,1);
+<span class="keyword">for</span> x = 1:N
+    w(x) = (a(x)*6)/15;    <span class="comment">%&#27599;&#31867;&#30340;&#27599;&#22825;&#38656;&#27714;</span>
+    u(x)=a(x)*6*102;       <span class="comment">%&#35745;&#31639;&#27599;&#31867;&#30340;&#24635;&#38656;&#27714;</span>
+    S(x)=siche*w(x);       <span class="comment">%&#27599;&#31867;&#30340;&#23433;&#20840;&#24211;&#23384;&#37327;</span>
+    Bestellungpunkt(x) = minni(x)*w(x)+S(x);   <span class="comment">% &#27599;&#31867;&#30340;&#35746;&#36135;&#28857;</span>
+<span class="keyword">end</span>
+</pre><h2>&#36951;&#20256;&#21442;&#25968;<a name="6"></a></h2><pre class="codeinput">NIND=3000;       <span class="comment">%&#31181;&#32676;&#22823;&#23567;</span>
+MAXGEN=200;     <span class="comment">%&#26368;&#22823;&#36951;&#20256;&#20195;&#25968;</span>
+Pc=0.9;         <span class="comment">%&#20132;&#21449;&#27010;&#29575;</span>
+Pm=0.2;        <span class="comment">%&#21464;&#24322;&#27010;&#29575;</span>
+GGAP=0.9;       <span class="comment">%&#20195;&#27807;</span>
+xx=[];
+yy=[];
+</pre><h2>&#21021;&#22987;&#21270;&#31181;&#32676;<a name="7"></a></h2><pre class="codeinput">Chrom=InitPop(NIND,N,u);
+</pre><h2>&#20248;&#21270;<a name="8"></a></h2><pre class="codeinput">gen=0;
+ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);   <span class="comment">%&#35745;&#31639;&#25104;&#26412;</span>
+preObjV=min(ObjV);
+<span class="keyword">for</span> gen=1:MAXGEN
+</pre><h2>&#35745;&#31639;&#36866;&#24212;&#24230;<a name="9"></a></h2><pre class="codeinput">    ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);  <span class="comment">%&#35745;&#31639;&#25104;&#26412;</span>
+    preObjV=min(ObjV);
+    FitnV=Fitness(ObjV);
+</pre><h2>&#36873;&#25321;<a name="10"></a></h2><pre class="codeinput">    SelCh=Select(Chrom,FitnV,GGAP);
+</pre><h2>&#20132;&#21449;&#25805;&#20316;<a name="11"></a></h2><pre class="codeinput">    SelCh=Recombin(SelCh,Pc);
+</pre><h2>&#21464;&#24322;<a name="12"></a></h2><pre class="codeinput">    SelCh=Mutate(SelCh,Pm);
+</pre><h2>&#36870;&#36716;&#25805;&#20316;<a name="13"></a></h2><pre class="codeinput">    SelCh=Reverse(SelCh,D,A,C,S,t,c,e,w,u);
+</pre><h2>&#37325;&#25554;&#20837;&#23376;&#20195;&#30340;&#26032;&#31181;&#32676;<a name="14"></a></h2><pre class="codeinput">    Chrom=Reins(Chrom,SelCh,ObjV);
+</pre><h2>&#26356;&#26032;&#25104;&#26412;<a name="15"></a></h2><pre class="codeinput">    xx=[xx;preObjV];
+     <span class="keyword">if</span> gen &gt;20
+        yy=[yy;mean(ObjV)];
+     <span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="keyword">end</span>
+
+
+ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);  <span class="comment">%&#35745;&#31639;&#25104;&#26412;</span>
+[minObjV,minInd]=min(ObjV);
+H = [20000 800 2000 50 40 40 60];      <span class="comment">%&#21407;&#26469;&#30340;&#35746;&#36135;&#21608;&#26399;</span>
+
+K = Kostberechen(A,C,D,S,t,c,e,w,u,H); <span class="comment">%&#21407;&#26469;&#30340;&#25104;&#26412;</span>
+</pre><h2>&#30011;&#22270;<a name="17"></a></h2><pre class="codeinput">figure
+X = 1:MAXGEN;
+XX = 21:MAXGEN;
+XXX = 150;
+p=plot(X,xx,<span class="string">'g'</span>,XX,yy,<span class="string">'b'</span>,XXX,K,<span class="string">'r*'</span>);
+xlabel(<span class="string">'&#36845;&#20195;&#27425;&#25968;'</span>)
+ylabel(<span class="string">'&#25104;&#26412;'</span>)
+title(<span class="string">'&#20248;&#21270;&#36807;&#31243;'</span>)
+<span class="comment">%p(1).Marker = 'o';</span>
+p(2).Marker = <span class="string">'v'</span>;
+</pre><img vspace="5" hspace="5" src="GA_Kost_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 成本的最优化计算
+% 根据物料清单，依据供货周期的不同，将货物分成了7类，即：7天，15天，30天，45天，60天，90到120天，120天以上。
+% 输入变量为订货量，单位：件。在主程序中为Chrom,在适应度函数中为H。
+% 假设条件：订货周期不会变化
+%          生产过程中的物力，人力成本恒定。
+%          生产中每天每类的需求量恒定
+%          每类的运输成本和仓储成本不同，但每一次运输的成本相同。
+%          暂时不考虑半成品的仓储成本。
+%          允许缺货，但要在规定期限内交货，工人存在加班。
+%BOM清单中，还有一些单价没有补全，但这只影响总成本的大小，并不影响优化过程，所以可以忽略。
+%% 遗传算法求解
+%输入：
+%NIND    为种群个数
+%MAXGEN  为停止代数，遗传到第MAXGEN代时程序停止,MAXGEN的具体取值视问题的规模和耗费的时间而定
+%m       为适值淘汰加速指数,最好取为1,2,3,4,不宜太大
+%Pc      交叉概率
+%Pm      变异概率
+
+%% 版本 V7.0
+% 将输入变量更改为订货量，修正成本计算模型，修正计算参数。
+%更新历史：
+%V6.3 更新的原始的订货周期，改成3类。
+%V6.2 修正了成本计算中的一个小问题  11.11
+%V6.11-V6.12 更改了原来的订货周期，使其符合一般的粗狂式管理方式。注释完善。  11.11
+%V6.0 新版本修改了加班成本的计算方式，使模型更加合理    11.11
+%V5.2 增加了原来的订货周期，计算出原来成本以供对比，并在图像中显示  11.11
+%V5.1 修正了各类运输成本，使其更符合实际情况     10.11
+%V4.1-V5.0 优化遗传参数，使最优值和最优解尽可能合理，尽量不出现局部最优解    10.11
+%V4.0 成本计算中增加了缺货成本计算，增加了优化过程图     09.11
+%V3.0 成本计算中将固定库存成本改成了变库存的成本计算     08.11
+%V2.0 输入数据，输出数据，程序结构完善      07.11
+%V1.0 初始版本，为恒定库存成本，恒定人力成本，恒定物力成本，恒定购买成本，变订货成本的总成本计算     05.11
+
+clear
+clc
+close all
+
+%% 加载数据
+% format long
+s = xlsread('QYC120-BOM清单.xls'); %读取表格数据
+A = 17*6*s(1,9);   %A为各类购买成本
+c = 50;          %工人的小时工资
+C = 100*17*15*8*c;   %C为生产种的人力成本，假设不缺货，不加班
+d = 10000;       %生产一个批次的物力成本
+D = 17*d;        %D为生产过程中的物力成本
+e = [0.01 0.05 0.1 0.5 1 5 10];   %存储成本
+N = 7;             %N为订购分类
+t = [500 500 1000 2000 3000 6000 8000];  %运输成本
+siche = 20;        %安全库存量，满足该参数天数生产的需要
+minni = [7 15 30 45 60 120 160];    %每类的最低订货周期，低于这个周期则会产生缺货
+
+%% 处理表格数据
+%计算各类每批次每车的需求量
+y = size(s,1);
+a = zeros(N,1);
+for z = 3:y
+    if s(z,8)<=7
+        a(1) = s(z,6)+a(1);
+    elseif s(z,8)>7&&s(z,8)<=15
+        a(2) = s(z,6)+a(2);
+    elseif s(z,8)>15&&s(z,8)<=30
+        a(3) = s(z,6)+a(3);
+    elseif s(z,8) == 45
+        a(4) = s(z,6)+a(4);
+    elseif s(z,8) == 60
+        a(5) = s(z,6)+a(5);
+    elseif s(z,8)>=90&&s(z,8)<=120
+        a(6) = s(z,6)+a(6);
+    else
+        a(7) = s(z,6)+a(7);
+    end
+end
+%计算每天需求（均值）;计算每类的总需求量
+u = zeros(N,1);
+w = zeros(N,1);
+S = zeros(N,1);
+Bestellungpunkt = zeros(N,1);
+for x = 1:N
+    w(x) = (a(x)*6)/15;    %每类的每天需求
+    u(x)=a(x)*6*102;       %计算每类的总需求
+    S(x)=siche*w(x);       %每类的安全库存量
+    Bestellungpunkt(x) = minni(x)*w(x)+S(x);   % 每类的订货点
+end
+%% 遗传参数
+NIND=3000;       %种群大小
+MAXGEN=200;     %最大遗传代数
+Pc=0.9;         %交叉概率
+Pm=0.2;        %变异概率
+GGAP=0.9;       %代沟
+xx=[];
+yy=[];
+%% 初始化种群
+Chrom=InitPop(NIND,N,u);
+%% 优化
+gen=0;
+ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);   %计算成本
+preObjV=min(ObjV);
+for gen=1:MAXGEN
+    %% 计算适应度
+    ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);  %计算成本
+    preObjV=min(ObjV);
+    FitnV=Fitness(ObjV);
+    %% 选择
+    SelCh=Select(Chrom,FitnV,GGAP);
+    %% 交叉操作
+    SelCh=Recombin(SelCh,Pc);
+    %% 变异
+    SelCh=Mutate(SelCh,Pm);
+    %% 逆转操作
+    SelCh=Reverse(SelCh,D,A,C,S,t,c,e,w,u);
+    %% 重插入子代的新种群
+    Chrom=Reins(Chrom,SelCh,ObjV);
+    %% 更新成本
+    xx=[xx;preObjV];
+     if gen >20
+        yy=[yy;mean(ObjV)];
+     end
+end
+
+
+ObjV = Kostberechen(A,C,D,S,t,c,e,w,u,Chrom);  %计算成本
+[minObjV,minInd]=min(ObjV);
+H = [20000 800 2000 50 40 40 60];      %原来的订货周期
+
+K = Kostberechen(A,C,D,S,t,c,e,w,u,H); %原来的成本
+%% 画图
+figure
+X = 1:MAXGEN;
+XX = 21:MAXGEN;
+XXX = 150;
+p=plot(X,xx,'g',XX,yy,'b',XXX,K,'r*');
+xlabel('迭代次数')
+ylabel('成本')
+title('优化过程')
+%p(1).Marker = 'o';
+p(2).Marker = 'v';
+
+
+##### SOURCE END #####
+--></body></html>
