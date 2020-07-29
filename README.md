@@ -5,6 +5,14 @@
  
  a) TSP: Vier gängige intelligente Optimierungsalgorithmen (Genetischer-, Ameisenkolonial-, Immun-, Tabutabellenalgorithmus) werden verwendet, um das TSP zu analysieren, und die Vor- und Nachteile verschiedener Algorithmen und ihr Anwendungswert werden verglichen.
  
+        ACO-TSP：Ameisenkolonialalgorithmus
+        
+        GA-TSP：Genetischer algorithmus
+        
+        Immu-TSP：Immunalgorithmus
+        
+        Tabu-TSP：Tabutabellenalgorithmus
+ 
  b) Cost: Der genetische Algorithmus wird verwendet, um die Analyse des Kostenmanagements für die Lagerung und Bestellung von Fabrik zu optimieren.
  
  c) KNN-and-Cluster：Basierend auf der Classifacation Learner Toolbox von Matlab werden kNN(k Nearest Neighbour Classification-Algorithmus)- und Cluster-Analyse-Algorithmen studiert und geübt, die üblicherweise im Data Mining verwendet werden.
