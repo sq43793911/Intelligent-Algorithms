@@ -1,6 +1,17 @@
 # Intelligent-Algorithms
  
  
+ De. Ver.
+ 
+ a) TSP: Vier gängige intelligente Optimierungsalgorithmen (Genetischer-, Ameisenkolonial-, Immun-, Tabutabellenalgorithmus) werden verwendet, um das TSP zu analysieren, und die Vor- und Nachteile verschiedener Algorithmen und ihr Anwendungswert werden verglichen.
+ 
+ b) Kost: Der genetische Algorithmus wird verwendet, um die Analyse des Kostenmanagements für die Lagerung und Bestellung von Fabrik zu optimieren.
+ 
+ c) KNN-and-Cluster：Basierend auf der Classifacation Learner Toolbox von Matlab werden kNN(k Nearest Neighbour Classification-Algorithmus)- und Cluster-Analyse-Algorithmen studiert und geübt, die üblicherweise im Data Mining verwendet werden.
+ 
+ 
+ chn. Ver.
+ 
 1. TSP：使用了4 种常⻅的最优化智能算法(遗传、蚁群、免疫、禁忌表算法) 对旅行商问题(TSP)进行分析，比较了各类算法的优缺点以及应用价值
 
         ACO-TSP：蚁群算法求解TSP
